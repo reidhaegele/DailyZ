@@ -1,0 +1,27 @@
+<header class="content">
+    <nav class="navbar">
+        <div class="start">
+            <a routerLink="/">DailyZ</a>
+        </div>
+        @if(user$ | async; as user) {
+        <div class="end">
+            <img [src]="user?.photoURL"
+                [alt]="user?.displayName" />
+            <span>
+                {{user?.displayName}}
+            </span>
+            |
+            <a
+                href="/login" (click)="this.userManager.logout()">
+                Sign out
+            </a>
+        </div>
+        }
+        @else {
+        <div class="end">
+            <!-- <a href="/login">Register</a>| -->
+            <a href="/login">Login</a>
+        </div>
+        }
+    </nav>
+</header>

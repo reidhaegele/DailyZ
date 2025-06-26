@@ -1,0 +1,75 @@
+// Variables
+$primary-color: #4a90e2;
+$secondary-color: #f5a623;
+$danger-color: #d0021b;
+$light-gray: #f8f9fa;
+$dark-gray: #343a40;
+$border-color: #dee2e6;
+
+// Mixin for button styles
+@mixin btn-styles($bg-color) {
+  background-color: $bg-color;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-family: sans-serif;
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+
+  thead {
+    background-color: $light-gray;
+
+    th {
+      color: $dark-gray;
+      font-weight: 600;
+    }
+  }
+
+  tbody tr {
+    &:hover {
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+    }
+  }
+}
+
+.btn {
+  margin-right: 0.5rem;
+}
+
+.btn-edit {
+  @include btn-styles($secondary-color);
+}
+
+.btn-save {
+  @include btn-styles($primary-color);
+}
+
+.btn-delete {
+  @include btn-styles($danger-color);
+}
