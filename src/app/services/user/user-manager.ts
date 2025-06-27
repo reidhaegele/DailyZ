@@ -133,7 +133,7 @@ export class UserManager {
   loadWebhooks = () => {
     const recentWebhooksQuery = query(collection(this.firestore, 'webhooks'), orderBy('timestamp', 'desc'), limit(12));
     // Start listening to the query.
-    return collectionData(recentWebhooksQuery);
+    return collectionData(recentWebhooksQuery, { idField: 'docID' });
   }
 
   // Saves a new webhook containing an image in Firebase.

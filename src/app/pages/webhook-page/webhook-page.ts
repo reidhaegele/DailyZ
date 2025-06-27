@@ -24,8 +24,8 @@ export class WebhookPage {
     this.url = '';
   }
 
-  hello() {
-    console.log("Hello Reid!")
+  hello(wh: DocumentData) {
+    console.log("Hello Reid!", wh)
   }
   // uploadImage(event: any) {
   //   const imgFile: File = event.target.files[0];
