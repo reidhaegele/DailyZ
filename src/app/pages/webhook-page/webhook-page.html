@@ -28,8 +28,8 @@
             </td> -->
             <td>{{webhook['timestamp'].toDate().toLocaleTimeString()}}</td>
             <td>
-              <button class="btn btn-edit" (click)="{}">Edit</button>
-              <button class="btn btn-delete" (click)="{}">Delete</button>
+              <!-- <button class="btn btn-edit" (click)="{}">Edit</button> -->
+              <button class="btn btn-delete" (click)="this.deleteWebhook(webhook['docID'])">Delete</button>
             </td>
           
           }

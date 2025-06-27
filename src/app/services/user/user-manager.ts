@@ -142,7 +142,9 @@ export class UserManager {
 
   async updateData(path: string, data: any) {}
 
-  async deleteData(path: string) {}
+  async deleteData(path: string) {
+    deleteDoc(doc(this.firestore, "webhooks", path))
+  }
 
   getDocData(path: string) {}
 

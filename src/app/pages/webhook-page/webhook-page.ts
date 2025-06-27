@@ -24,6 +24,10 @@ export class WebhookPage {
     this.url = '';
   }
 
+  deleteWebhook(docID: string) {
+    this.userManager.deleteData(docID)
+  }
+
   hello(wh: DocumentData) {
     console.log("Hello Reid!", wh)
   }
