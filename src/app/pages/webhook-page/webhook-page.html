@@ -5,25 +5,46 @@
           <th>Name</th>
           <th>URL</th>
           <th>Last Run</th>
+          <th>Updated</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
+        @for (webhook of (webhooks$ | async); track webhook) {
+          {{ hello() }}
+          <tr>
+          @if (user$ | async; as user) {
+            @if (webhook['name'] && webhook['name'].length > 0){
+            <td>
+                {{webhook['name']}} 
+            </td>
+            }
+            <td>
+              {{webhook['url']}} 
+            </td>
+            <td></td>
+            <!-- <td>
+              {{webhook['text']}} 
+            </td> -->
+            <td>{{webhook['timestamp'].toDate().toLocaleTimeString()}}</td>
+          
+          }
+          </tr>
+        }
         <tr>
-  
           <td>
-            <input type="text"/>
+            <input type="text" placeholder="Name" [(ngModel)]="this.name"/>
           </td>
           <td>
-            <input type="text"/>
+            <input type="text" placeholder="URL" [(ngModel)]="this.url"/>
           </td>
-          <td>
+          <!-- <td>
             <input type="number"/>
-          </td>
+          </td> -->
   
           <td>
             <button class="btn btn-edit" (click)="{}">Edit</button>
-            <button class="btn btn-save" (click)="{}">Save</button>
+            <button class="btn btn-save" (click)="this.sendTextWebhook()">Save</button>
             <button class="btn btn-delete" (click)="{}">Delete</button>
           </td>
         </tr>

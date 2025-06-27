@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UserManager } from '../../services/user-manager';
+import { UserManager } from '../../services/user/user-manager';
 
 @Component({
   selector: 'app-login-page',
