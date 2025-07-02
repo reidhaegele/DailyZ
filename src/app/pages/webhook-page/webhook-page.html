@@ -4,6 +4,8 @@
         <tr>
           <th>Name</th>
           <th>URL</th>
+          <th>LC Daily</th>
+          <th>NC 150</th>
           <th>Last Run</th>
           <th>Updated</th>
           <th>Actions</th>
@@ -16,13 +18,21 @@
           @if (user$ | async; as user) {
             @if (webhook['name'] && webhook['name'].length > 0){
             <td>
-                {{webhook['name']}} 
+                {{webhook['name']}}
             </td>
             }
             <td>
-              {{webhook['url']}} 
+              {{webhook['url']}}
             </td>
-            <td></td>
+            <td>
+              {{webhook['daily']}}
+            </td>
+            <td>
+              {{webhook['neetcode150']}}
+            </td>
+            <td>
+              {{webhook['lastRun']}}
+            </td>
             <!-- <td>
               {{webhook['text']}} 
             </td> -->
@@ -41,6 +51,12 @@
           </td>
           <td>
             <input type="text" placeholder="URL" [(ngModel)]="this.url"/>
+          </td>
+          <td>
+            <input type="checkbox" [(ngModel)]="this.daily"/>
+          </td>
+          <td>
+            <input type="number" min="-1" max="150" [(ngModel)]="this.neetcode150"/>
           </td>
           <td>
             <input type="text" disabled/>

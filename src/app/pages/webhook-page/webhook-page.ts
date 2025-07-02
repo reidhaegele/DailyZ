@@ -17,11 +17,15 @@ export class WebhookPage {
   user$ = this.userManager.user$;
   name = '';
   url = '';
+  daily = false;
+  neetcode150 = -1;
 
   sendTextWebhook() {
-    this.userManager.saveTextWebhook(this.name, this.url);
+    this.userManager.saveTextWebhook(this.name, this.url, this.daily, this.neetcode150);
     this.name = '';
     this.url = '';
+    this.daily = false;
+    this.neetcode150 = -1;
   }
 
   deleteWebhook(docID: string) {

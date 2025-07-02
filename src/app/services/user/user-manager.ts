@@ -41,7 +41,9 @@ type Webhook = {
   last_run?: FieldValue | null,
   last_run_status?: string | null,
   next_run?: FieldValue | null,
-  uid: string | null
+  uid: string | null,
+  daily?: boolean | null,
+  neetcode150?: number | null
 };
 
 @Injectable({
@@ -87,6 +89,8 @@ export class UserManager {
   addWebhook = async (
     name: string | null,
     url: string | null,
+    daily: boolean | null,
+    neetcode150: number | null,
   ): Promise<void | DocumentReference<DocumentData>> => {
     // ignore empty webhooks
     if (!url && !name) {
@@ -111,6 +115,8 @@ export class UserManager {
   
     url && (webhook.url = url); //if url is not null, assign webhook.url to url
     name && (webhook.name = name);
+    daily && (webhook.daily = daily);
+    neetcode150 && (webhook.neetcode150 = neetcode150);
   
     try {
       const newWebhookRef = await addDoc(
@@ -125,8 +131,8 @@ export class UserManager {
   };
 
   // Saves a new webhook to Cloud Firestore.
-  saveTextWebhook = async (webhookText: string, webhookUrl: string) => {
-    return this.addWebhook(webhookText, webhookUrl);
+  saveTextWebhook = async (webhookText: string, webhookUrl: string, daily: boolean, neetcode150: number) => {
+    return this.addWebhook(webhookText, webhookUrl, daily, neetcode150);
   };
 
   // Loads chat webhooks history and listens for upcoming ones.
