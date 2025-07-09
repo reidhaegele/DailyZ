@@ -32,18 +32,20 @@ import {
 } from '@angular/fire/firestore';
 import { map, switchMap, firstValueFrom, filter, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { paths } from '../../enums/paths.enum';
 
 type Webhook = {
   user: string | null,
   name?: string | null,
   url?: string | null,
-  timestamp: FieldValue,
+  created: FieldValue,
   last_run?: FieldValue | null,
-  last_run_status?: string | null,
+  last_run_status?: boolean | null,
   next_run?: FieldValue | null,
   uid: string | null,
-  daily?: boolean | null,
-  neetcode150?: number | null
+  path?: paths | null,
+  startDate?: FieldValue | null,
+  frequency?: number | null
 };
 
 @Injectable({
@@ -89,8 +91,9 @@ export class UserManager {
   addWebhook = async (
     name: string | null,
     url: string | null,
-    daily: boolean | null,
-    neetcode150: number | null,
+    path: paths | null,
+    startDate: FieldValue | null,
+    frequency: number | null
   ): Promise<void | DocumentReference<DocumentData>> => {
     // ignore empty webhooks
     if (!url && !name) {
@@ -108,15 +111,16 @@ export class UserManager {
     }
   
     const webhook: Webhook = {
-      timestamp: serverTimestamp(),
+      created: serverTimestamp(),
       uid: this.currentUser?.uid,
       user: this.currentUser.displayName,
     };
   
     url && (webhook.url = url); //if url is not null, assign webhook.url to url
     name && (webhook.name = name);
-    daily && (webhook.daily = daily);
-    neetcode150 && (webhook.neetcode150 = neetcode150);
+    path && (webhook.path = path);
+    startDate && (webhook.startDate = startDate);
+    frequency && (webhook.frequency = frequency);
   
     try {
       const newWebhookRef = await addDoc(
@@ -131,8 +135,8 @@ export class UserManager {
   };
 
   // Saves a new webhook to Cloud Firestore.
-  saveTextWebhook = async (webhookText: string, webhookUrl: string, daily: boolean, neetcode150: number) => {
-    return this.addWebhook(webhookText, webhookUrl, daily, neetcode150);
+  saveTextWebhook = async (webhookText: string, webhookUrl: string, subscription: paths, startDate: FieldValue, frequency: number) => {
+    return this.addWebhook(webhookText, webhookUrl, subscription, startDate, frequency);
   };
 
   // Loads chat webhooks history and listens for upcoming ones.

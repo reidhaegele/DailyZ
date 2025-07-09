@@ -4,10 +4,12 @@
         <tr>
           <th>Name</th>
           <th>URL</th>
-          <th>LC Daily</th>
-          <th>NC 150</th>
+          <th>Path</th>
+          <th>Question</th>
+          <th>Frequency</th>
           <th>Last Run</th>
-          <th>Updated</th>
+          <th>Last Run Status</th>
+          <th>Created</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -25,7 +27,7 @@
               {{webhook['url']}}
             </td>
             <td>
-              {{webhook['daily']}}
+              {{webhook['path']}}
             </td>
             <td>
               {{webhook['neetcode150']}}
@@ -36,7 +38,7 @@
             <!-- <td>
               {{webhook['text']}} 
             </td> -->
-            <td>{{webhook['timestamp'].toDate().toLocaleTimeString()}}</td>
+            <td>{{webhook['created'].toDate().toLocaleTimeString()}}</td>
             <td>
               <!-- <button class="btn btn-edit" (click)="{}">Edit</button> -->
               <button class="btn btn-delete" (click)="this.deleteWebhook(webhook['docID'])">Delete</button>
@@ -53,10 +55,15 @@
             <input type="text" placeholder="URL" [(ngModel)]="this.url"/>
           </td>
           <td>
-            <input type="checkbox" [(ngModel)]="this.daily"/>
+            <select name="path" id="path" [(ngModel)]="this.path">
+              <option value="daily">LC Daily</option>
+              <option value="neetcode150">NC 150</option>
+              <option value="neetcode250">NC 250</option>
+              <option value="leetcodeAll">LC All</option>
+            </select>
           </td>
           <td>
-            <input type="number" min="-1" max="150" [(ngModel)]="this.neetcode150"/>
+            <input type="number" min="-1" max="150" [(ngModel)]="this.frequency"/>
           </td>
           <td>
             <input type="text" disabled/>
